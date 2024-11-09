@@ -14,8 +14,8 @@ import {
 } from "@/app/_components/ui/popover";
 
 interface DatePickerProps {
-  value?: Date;
-  onChange?: SelectSingleEventHandler;
+  value: Date;
+  onChange: SelectSingleEventHandler;
 }
 
 export const DatePicker = ({ value, onChange }: DatePickerProps) => {

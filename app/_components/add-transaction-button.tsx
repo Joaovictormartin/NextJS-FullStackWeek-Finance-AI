@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { useState } from "react";
 import {
   TransactionType,
   TransactionCategory,
@@ -38,10 +39,13 @@ import { Input } from "@/app/_components/ui/input";
 import { Button } from "@/app/_components/ui/button";
 import { MoneyInput } from "@/app/_components/ui/money-inputs";
 import { DatePicker } from "./date-picker";
+import { addTransactions } from "../_actions/add_transactions";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, { message: "O nome é obrigatório" }),
-  amount: z.string().min(1, { message: "O valor é obrigatório" }),
+  amount: z
+    .number({ required_error: "O valor é obrigatório" })
+    .positive({ message: "O valor deve ser positivo" }),
   type: z.nativeEnum(TransactionType, {
     required_error: "O tipo é obrigatório",
   }),
@@ -57,11 +61,13 @@ const formSchema = z.object({
 });
 
 const AddTransactionButton = () => {
+  const [isDialogIsOpen, setIsDialogIsOpen] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      amount: "",
+      amount: 50,
       date: new Date(),
       type: TransactionType.EXPENSE,
       category: TransactionCategory.OTHER,
@@ -69,16 +75,27 @@ const AddTransactionButton = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await addTransactions({
+        ...values,
+        date: new Date("2024-11-09T00:00:00.000Z"),
+      });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      form.reset();
+      setIsDialogIsOpen(false);
+    }
   };
 
   const onOpenChange = (open: boolean) => {
+    setIsDialogIsOpen(open);
     if (!open) form.reset();
   };
 
   return (
-    <Dialog onOpenChange={onOpenChange}>
+    <Dialog open={isDialogIsOpen} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
         <Button className="rounded-full font-bold">
           Adicionar Transação <ArrowDownUpIcon />
@@ -115,7 +132,15 @@ const AddTransactionButton = () => {
                 <FormItem>
                   <FormLabel>Valor</FormLabel>
                   <FormControl>
-                    <MoneyInput placeholder="Digite o valor..." {...field} />
+                    <MoneyInput
+                      value={field.value}
+                      onBlur={field.onBlur}
+                      disabled={field.disabled}
+                      placeholder="Digite o valor..."
+                      onValueChange={({ floatValue }) =>
+                        field.onChange(floatValue)
+                      }
+                    />
                   </FormControl>
 
                   <FormMessage />

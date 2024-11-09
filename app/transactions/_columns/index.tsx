@@ -1,37 +1,15 @@
 "use client";
 
-import {
-  Transaction,
-  TransactionCategory,
-  TransactionPaymentMethod,
-} from "@prisma/client";
+import { Transaction } from "@prisma/client";
+import { Pencil, TrashIcon } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 
-import TransactionTypeBadge from "@/app/transactions/_components/type-badge";
+import {
+  TRANSACTION_CATEGORY_LABELS,
+  TRANSACTION_PAYMENT_METHOD_LABELS,
+} from "@/app/_constants/transactions";
 import { Button } from "@/app/_components/ui/button";
-import { Pencil, TrashIcon } from "lucide-react";
-
-const TRANSACTION_CATEGORY_LABELS = {
-  [TransactionCategory.HOUSING]: "Moradia",
-  [TransactionCategory.TRANSPORTATION]: "Transporte",
-  [TransactionCategory.FOOD]: "Alimentação",
-  [TransactionCategory.ENTERTAINMENT]: "Entretenimento",
-  [TransactionCategory.HEALTH]: "Saúde",
-  [TransactionCategory.UTILITY]: "Utilidade",
-  [TransactionCategory.SALARY]: "Salário",
-  [TransactionCategory.EDUCATION]: "Educação",
-  [TransactionCategory.OTHER]: "Outros",
-};
-
-const TRANSACTION_PATMENT_METHOD_LABELS = {
-  [TransactionPaymentMethod.CREDIT_CARD]: "Cartão de Crédito",
-  [TransactionPaymentMethod.DEBIT_CARD]: "Cartão de Débito",
-  [TransactionPaymentMethod.BANK_TRANSFER]: "Transferência Bancária",
-  [TransactionPaymentMethod.BANK_SLIP]: "Boleto Bancário",
-  [TransactionPaymentMethod.CASH]: "Dinheiro",
-  [TransactionPaymentMethod.PIX]: "Pix",
-  [TransactionPaymentMethod.OTHER]: "Outros",
-};
+import TransactionTypeBadge from "@/app/transactions/_components/type-badge";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   { accessorKey: "name", header: "Nome" },
@@ -52,7 +30,7 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "payment",
     header: "Método de Pagamento",
     cell: ({ row: { original: transaction } }) =>
-      TRANSACTION_PATMENT_METHOD_LABELS[transaction.payment],
+      TRANSACTION_PAYMENT_METHOD_LABELS[transaction.payment],
   },
   {
     accessorKey: "date",

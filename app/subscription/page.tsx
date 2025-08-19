@@ -12,17 +12,17 @@ const SubscriptionPage = async () => {
   const { userId } = await auth();
   if (!userId) redirect("/login");
 
-  const user = await (await clerkClient()).users.getUser(userId);
+  const user = await clerkClient().users.getUser(userId);
   const currentMonthTransactions = await getCurrentMonthTransactions();
   const hasPremiumPlan = user.publicMetadata.subscriptionPlan == "premium";
 
   return (
     <>
       <Navbar />
-      <div className="space-y-6 p-6">
+      <div className="flex-1 space-y-10 p-6">
         <h1 className="text-2xl font-bold">Assinatura</h1>
 
-        <div className="flex items-center gap-6">
+        <div className="flex justify-center gap-6">
           <Card className="w-[450px]">
             <CardHeader className="relative border-b border-solid py-8">
               {!hasPremiumPlan && (

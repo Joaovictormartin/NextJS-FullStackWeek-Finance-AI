@@ -5,17 +5,17 @@ import { auth } from "@clerk/nextjs/server";
 
 const cancel_url = process.env.NEXT_PUBLIC_SITE_URL;
 const success_url = process.env.NEXT_PUBLIC_SITE_URL;
-const stipeSecretKey = process.env.STRIPE_SECRET_KEY;
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 const stripePremiumPlanPriceId = process.env.STRIPE_PREMIUM_PLAN_PRICE_ID;
 
 export const createStripeCheckout = async () => {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
-  if (!stipeSecretKey) throw new Error("Stripe secret key not found");
+  if (!stripeSecretKey) throw new Error("Stripe secret key not found");
 
-  const stripe = new Stripe(stipeSecretKey, {
-    apiVersion: "2024-10-28.acacia",
+  const stripe = new Stripe(stripeSecretKey, {
+    apiVersion: "2025-02-24.acacia",
   });
 
   const session = await stripe.checkout.sessions.create({

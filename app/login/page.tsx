@@ -6,7 +6,7 @@ import { SignInButton } from "@clerk/nextjs";
 
 import { Button } from "@/app/_components/ui/button";
 
-const Login = async () => {
+const LoginPage = async () => {
   const { userId } = await auth();
   if (userId) redirect("/");
 
@@ -16,9 +16,9 @@ const Login = async () => {
         <Image
           width={173}
           height={39}
-          src="/logo.svg"
           alt="Finance AI"
           className="mb-8"
+          src="/svg/logo.svg"
         />
 
         <h1 className="mb-3 text-4xl font-bold">Bem-vindo</h1>
@@ -48,4 +48,4 @@ const Login = async () => {
   );
 };
 
-export default Login;
+export default LoginPage;

@@ -11,7 +11,9 @@ const mulish = Mulish({
 
 export const metadata: Metadata = {
   title: "Finance Ai",
-  description: "Finance System",
+  icons: "/svg/logo.svg",
+  description:
+    "A Finance AI é uma plataforma de gestão financeira que utiliza IA para monitorar suas movimentações, e oferecer insights personalizados, facilitando o controle do seu orçamento.",
 };
 
 interface RootLayoutProps {

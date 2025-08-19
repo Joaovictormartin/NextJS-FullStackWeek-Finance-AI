@@ -31,6 +31,12 @@ const ExpensesPerCategory = ({
             <Progress value={category.percentageOfTotal} />
           </div>
         ))}
+
+        {expensesPerCategory.length === 0 && (
+          <p className="text-sm text-muted-foreground">
+            Nenhum resultado encontrado...
+          </p>
+        )}
       </CardContent>
     </ScrollArea>
   );

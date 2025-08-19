@@ -5,13 +5,13 @@ import {
 } from "@prisma/client";
 
 export const TRANSACTION_PAYMENT_METHOD_ICONS = {
-  [TransactionPaymentMethod.CREDIT_CARD]: "credit-card.svg",
-  [TransactionPaymentMethod.DEBIT_CARD]: "debit-card.svg",
-  [TransactionPaymentMethod.BANK_TRANSFER]: "bank-transfer.svg",
-  [TransactionPaymentMethod.BANK_SLIP]: "bank-slip.svg",
-  [TransactionPaymentMethod.CASH]: "money.svg",
-  [TransactionPaymentMethod.PIX]: "pix.svg",
-  [TransactionPaymentMethod.OTHER]: "other.svg",
+  [TransactionPaymentMethod.CREDIT_CARD]: "svg/credit-card.svg",
+  [TransactionPaymentMethod.DEBIT_CARD]: "svg/debit-card.svg",
+  [TransactionPaymentMethod.BANK_TRANSFER]: "svg/bank-transfer.svg",
+  [TransactionPaymentMethod.BANK_SLIP]: "svg/bank-slip.svg",
+  [TransactionPaymentMethod.CASH]: "svg/money.svg",
+  [TransactionPaymentMethod.PIX]: "svg/pix.svg",
+  [TransactionPaymentMethod.OTHER]: "svg/other.svg",
 };
 
 export const TRANSACTION_CATEGORY_LABELS = {

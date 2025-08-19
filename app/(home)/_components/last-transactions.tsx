@@ -68,6 +68,12 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
             </p>
           </div>
         ))}
+
+        {lastTransactions.length === 0 && (
+          <p className="text-sm text-muted-foreground">
+            Nenhum resultado encontrado...
+          </p>
+        )}
       </CardContent>
     </ScrollArea>
   );

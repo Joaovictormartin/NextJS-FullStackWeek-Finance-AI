@@ -1,19 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { PencilIcon } from "lucide-react";
+import { TrashIcon } from "lucide-react";
 import { Transaction } from "@prisma/client";
 
 import { Button } from "@/app/_components/ui/button";
-import UpsertTransactionDialog from "@/app/_components/upsert-transaction-dialog";
+import { ModalDeleteTransaction } from "./modal-delete-transaction";
 
-interface EditTransactionButtonProps {
+interface DeleteTransactionButtonProps {
   transaction: Transaction;
 }
 
-export const EditTransactionButton = ({
+export const DeleteTransactionButton = ({
   transaction,
-}: EditTransactionButtonProps) => {
+}: DeleteTransactionButtonProps) => {
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
   return (
@@ -24,21 +24,14 @@ export const EditTransactionButton = ({
         className="text-muted-foreground"
         onClick={() => setDialogIsOpen(true)}
       >
-        <PencilIcon />
+        <TrashIcon />
       </Button>
 
-      <UpsertTransactionDialog
+      <ModalDeleteTransaction
         isOpen={dialogIsOpen}
         setIsOpen={setDialogIsOpen}
         transactionId={transaction.id}
-        defaultValues={{
-          ...transaction,
-          payment: transaction.payment,
-          amount: Number(transaction.amount),
-        }}
       />
     </>
   );
 };
-
-export default EditTransactionButton;

@@ -10,7 +10,9 @@ import {
   TRANSACTION_PAYMENT_METHOD_LABELS,
 } from "@/app/_constants/transactions";
 import { Button } from "@/app/_components/ui/button";
+import { formatCurrency } from "@/app/_utils/currency";
 import EditTransactionButton from "../_components/edit-transaction-button";
+import { formatDate } from "@/app/_utils/locale-date";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
@@ -31,7 +33,7 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
       TRANSACTION_CATEGORY_LABELS[transaction.category],
   },
   {
-    accessorKey: "paymentMethod",
+    accessorKey: "payment",
     header: "Método de Pagamento",
     cell: ({ row: { original: transaction } }) =>
       TRANSACTION_PAYMENT_METHOD_LABELS[transaction.payment],
@@ -40,20 +42,13 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "date",
     header: "Data",
     cell: ({ row: { original: transaction } }) =>
-      new Date(transaction.date).toLocaleDateString("pt-BR", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      }),
+      formatDate(transaction.date, {}),
   },
   {
     accessorKey: "amount",
     header: "Valor",
     cell: ({ row: { original: transaction } }) =>
-      new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      }).format(Number(transaction.amount)),
+      formatCurrency(Number(transaction.amount)),
   },
   {
     accessorKey: "actions",

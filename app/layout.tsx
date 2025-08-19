@@ -1,7 +1,7 @@
 import "./globals.css";
 
-import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
+import { dark } from "@clerk/themes";
 import { Mulish } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -14,16 +14,16 @@ export const metadata: Metadata = {
   description: "Finance System",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body className={`${mulish.className} dark antialiased`}>
         <ClerkProvider appearance={{ baseTheme: dark }}>
-          {children}
+          <div className="flex h-full flex-col overflow-hidden">{children}</div>
         </ClerkProvider>
       </body>
     </html>

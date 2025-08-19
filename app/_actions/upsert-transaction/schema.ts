@@ -10,6 +10,6 @@ export const upsertTransactionSchema = z.object({
   amount: z.number().positive(),
   type: z.nativeEnum(TransactionType),
   category: z.nativeEnum(TransactionCategory),
-  paymentMethod: z.nativeEnum(TransactionPaymentMethod),
+  payment: z.nativeEnum(TransactionPaymentMethod),
   date: z.date(),
 });

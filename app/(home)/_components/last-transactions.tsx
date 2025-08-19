@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Transaction, TransactionType } from "@prisma/client";
 
 import { Button } from "@/app/_components/ui/button";
+import { formatDate } from "@/app/_utils/locale-date";
 import { formatCurrency } from "@/app/_utils/currency";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import { CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
@@ -52,7 +53,7 @@ const LastTransactions = ({ lastTransactions }: LastTransactionsProps) => {
               <div>
                 <p className="text-sm font-bold">{transaction.name}</p>
                 <p className="text-sm text-muted-foreground">
-                  {new Date(transaction.date).toLocaleDateString("pt-BR", {
+                  {formatDate(transaction.date, {
                     day: "2-digit",
                     month: "short",
                     year: "numeric",

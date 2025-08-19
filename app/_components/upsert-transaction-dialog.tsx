@@ -61,7 +61,7 @@ const formSchema = z.object({
   category: z.nativeEnum(TransactionCategory, {
     required_error: "A categoria é obrigatória.",
   }),
-  paymentMethod: z.nativeEnum(TransactionPaymentMethod, {
+  payment: z.nativeEnum(TransactionPaymentMethod, {
     required_error: "O método de pagamento é obrigatório.",
   }),
   date: z.date({ required_error: "A data é obrigatória." }),
@@ -83,7 +83,7 @@ const UpsertTransactionDialog = ({
       date: new Date(),
       type: TransactionType.EXPENSE,
       category: TransactionCategory.OTHER,
-      paymentMethod: TransactionPaymentMethod.CASH,
+      payment: TransactionPaymentMethod.CASH,
     },
   });
 
@@ -213,7 +213,7 @@ const UpsertTransactionDialog = ({
             />
 
             <FormField
-              name="paymentMethod"
+              name="payment"
               control={form.control}
               render={({ field }) => (
                 <FormItem>

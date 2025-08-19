@@ -24,8 +24,8 @@ const HomePage = async ({ searchParams: { month } }: HomeProps) => {
   if (monthIsInvalid) redirect(`?month=${new Date().getMonth() + 1}`);
 
   const dashboard = await getDashboard(month);
-  const user = await clerkClient().users.getUser(userId);
   const userCanAddTransaction = await canUserAddTransaction();
+  const user = await (await clerkClient()).users.getUser(userId);
 
   return (
     <>

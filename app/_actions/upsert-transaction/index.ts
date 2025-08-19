@@ -17,7 +17,7 @@ interface UpsertTransactionParams {
   amount: number;
   type: TransactionType;
   category: TransactionCategory;
-  paymentMethod: TransactionPaymentMethod;
+  payment: TransactionPaymentMethod;
   date: Date;
 }
 

@@ -30,14 +30,18 @@ const SummaryCard = ({
 
       <CardContent className="flex justify-between">
         <p
-          className={`font-bold ${size === "small" ? "text-2xl" : "text-4xl"}`}
+          className={`truncate font-bold ${size === "small" ? "text-2xl" : "text-2xl md:text-4xl"}`}
         >
           {formatCurrency(amount)}
         </p>
 
-        {size === "large" && (
-          <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />
-        )}
+        <div className="hidden sm:block">
+          {size === "large" && (
+            <AddTransactionButton
+              userCanAddTransaction={userCanAddTransaction}
+            />
+          )}
+        </div>
       </CardContent>
     </Card>
   );

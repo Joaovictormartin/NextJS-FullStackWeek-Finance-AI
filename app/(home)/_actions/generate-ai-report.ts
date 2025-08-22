@@ -3,6 +3,7 @@
 import OpenAI from "openai";
 import { db } from "@/app/_lib/prisma";
 import { auth, clerkClient } from "@clerk/nextjs/server";
+
 import { GenerateAiReportSchema, generateAiReportSchema } from "./schema";
 
 const DUMMY_REPORT =
@@ -25,13 +26,14 @@ export const generateAiReport = async ({ month }: GenerateAiReportSchema) => {
     return DUMMY_REPORT;
   }
 
+  const currentYear = new Date().getFullYear();
   const openAi = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
   const transactions = await db.transaction.findMany({
     where: {
       date: {
-        gte: new Date(`2024-${month}-01`),
-        lt: new Date(`2024-${month}-31`),
+        gte: new Date(`${currentYear}-${month}-01`),
+        lt: new Date(`${currentYear}-${month}-31`),
       },
     },
   });

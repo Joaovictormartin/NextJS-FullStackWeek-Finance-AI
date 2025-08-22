@@ -2,8 +2,8 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
 import { db } from "@/app/_lib/prisma";
-import { Navbar } from "@/app/_components/navbar";
 import { transactionColumns } from "./_columns";
+import { Navbar } from "@/app/_components/navbar";
 import { DataTable } from "@/app/_components/ui/data-table";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import AddTransactionButton from "@/app/_components/add-transaction-button";
@@ -20,7 +20,7 @@ const TransactionsPage = async () => {
     <>
       <Navbar />
 
-      <div className="space-y-6 overflow-hidden p-6">
+      <div className="container mx-auto space-y-6 overflow-hidden p-6">
         <div className="flex w-full items-center justify-between">
           <h1 className="text-2xl font-bold">Transações</h1>
           <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />

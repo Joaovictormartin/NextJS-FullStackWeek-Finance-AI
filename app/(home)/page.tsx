@@ -26,35 +26,31 @@ const HomePage = async ({ searchParams: { month } }: HomeProps) => {
   const dashboard = await getDashboard(month);
   const user = await clerkClient().users.getUser(userId);
   const userCanAddTransaction = await canUserAddTransaction();
+  const isPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
 
   return (
     <>
       <Navbar />
-      <div className="flex h-full flex-col space-y-6 overflow-hidden p-6">
-        <div className="flex justify-between">
+
+      <div className="container mx-auto flex h-full flex-col space-y-4 p-4 sm:px-6 sm:py-4 lg:overflow-hidden">
+        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <h1 className="text-2xl font-bold">Dashboard</h1>
 
-          <div className="flex items-center gap-3">
-            <AiReportButton
-              month={month}
-              hasPremiumPlan={
-                user.publicMetadata.subscriptionPlan === "premium"
-              }
-            />
-
+          <div className="flex items-center justify-between gap-2">
+            <AiReportButton month={month} hasPremiumPlan={isPremiumPlan} />
             <TimeSelect />
           </div>
         </div>
 
-        <div className="grid h-full grid-cols-[2fr,1fr] gap-6 overflow-hidden">
-          <div className="flex flex-col gap-6 overflow-hidden">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-[3fr,2fr] lg:grid-cols-[2fr,1fr]">
+          <div className="flex flex-col gap-6">
             <SummaryCards
               month={month}
               userCanAddTransaction={userCanAddTransaction}
               {...dashboard}
             />
 
-            <div className="grid h-full grid-cols-3 grid-rows-1 gap-6 overflow-hidden">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <TransactionsPieChart {...dashboard} />
 
               <ExpensesPerCategory

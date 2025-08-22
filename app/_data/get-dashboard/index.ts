@@ -45,7 +45,7 @@ export const getDashboard = async (month: string) => {
     )?._sum?.amount,
   );
 
-  const balance = depositsTotal - expensesTotal + investmentsTotal;
+  const balance = depositsTotal - expensesTotal - investmentsTotal;
 
   const transactionsTotal = Number(
     (

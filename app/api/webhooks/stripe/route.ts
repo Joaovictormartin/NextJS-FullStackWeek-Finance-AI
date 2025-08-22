@@ -22,12 +22,14 @@ export const POST = async (request: Request) => {
   try {
     event = stripe.webhooks.constructEvent(text, signature, webhookSecret);
   } catch (err) {
+    console.error(err);
     return NextResponse.error();
   }
 
   switch (event.type) {
     case "invoice.paid": {
-      const invoice = event.data.object as Stripe.Invoice;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const invoice = event.data.object as Stripe.Invoice & { parent?: any };
       let subscriptionId = invoice.subscription as string | null;
       if (!subscriptionId && invoice?.parent.type === "subscription_details") {
         subscriptionId = invoice?.parent.subscription_details?.subscription;

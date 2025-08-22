@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import "./globals.css";
 
 import type { Metadata } from "next";
@@ -24,7 +26,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
     <html lang="pt-BR">
       <body className={`${mulish.className} dark antialiased`}>
-        <ClerkProvider appearance={{ baseTheme: dark }}>
+        <ClerkProvider appearance={{ baseTheme: dark as any }}>
           <div className="flex h-full flex-col">{children}</div>
         </ClerkProvider>
       </body>
